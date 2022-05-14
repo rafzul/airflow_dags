@@ -74,7 +74,7 @@ with DAG(
     schema_file = Path(f"../schemas/nytaxi_schema_{TAXI_TYPE}")
    
     parquetize_data_task = PythonOperator(
-        task_id="parquetize_data",
+        task_id="parquetize_dataaa",
         python_callable=parquetize_data,
         op_kwargs={
             "schema": schema_file,
