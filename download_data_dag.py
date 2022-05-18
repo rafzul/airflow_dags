@@ -27,8 +27,8 @@ EXTSCRIPT_PATH = "../scripts/"
 
 #instance a spark session
 spark = SparkSession.builder \
-    .maste("local[*]") \
-    .appName('sparknytaxi') \ 
+    .master("local[*]") \
+    .appName('sparknytaxi') \
     .getOrCreate()
 
 #setting up script for parquetizing
@@ -39,25 +39,23 @@ def parquetize_data(schema_file, csv_file):
     .csv(csv_file)
 
     df_parquetized = df_parquetized.repartition(24)
-    df.write.parquet("media/rafzul/"Terminal Dogma"/nytaxidata/raw/{TAXI_TYPE}/{YEAR}/{MONTH}")
+    df.write.parquet("media/rafzul/'Terminal Dogma'/nytaxidata/raw/{TAXI_TYPE}/{YEAR}/{MONTH}")
 
 
 #setting up DAG
-default_args = {
-    "owner": "rafzul",
+default_args = {"owner": "rafzul",
     "start_date": datetime(2020,1,1),
     "end_date": datetime(2020,2,1)
     "schedule_interval"="@monthly",
     "depends_on_past": False,
-    "retries": 1,
-}
+    "retries": 1}
 
 
 with DAG(
     dag_id="download_dag",
     default_args=default_args,
     catchup=False,
-    max_active_runs=3,
+    max_active_runs=3,      
     tags=['nytaxi-dag'],
 ) as dag:
 
