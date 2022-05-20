@@ -2,8 +2,8 @@ from airflow.operators import BashOperator
 from airflow.models import DAG
 from datetime import datetime
 from pathlib import path
-import pyspark
-from pyspark.sql import SparkSession, types
+from "../scripts/parquetizing.py" import parquetize_data
+
 
 
 #setting up Bash parametrization
@@ -12,7 +12,7 @@ URL_PREFIX="https://s3.amazonaws.com/nyc-tlc/trip+data"
 
 # FMONTH= `printf "%02d" ${MONTH}`
 URL="${URL_PREFIX}/${TAXI_TYPE}_tripdata_${YEAR}-${FMONTH}.csv"
-LOCAL_PREFIX="/media/rafzul/'Terminal Dogma'/nytaxidata/raw/${TAXI_TYPE}/${YEAR}/${MONTH}"
+LOCAL_PREFIX="/media/rafzul/'Terminal Dogma'/nytax idata/raw/${TAXI_TYPE}/${YEAR}/${MONTH}"
 LOCAL_FILE="${TAXI_TYPE}_tripdata_${YEAR}-${FMONTH}.csv"
 LOCAL_PATH="${LOCAL_PREFIX}/${LOCAL_FILE}"
 
@@ -25,28 +25,11 @@ YEAR = datetime.strptime(logical_date, "%y")
 EXTSCRIPT_PATH = "../scripts/"
 
 
-#instance a spark session
-spark = SparkSession.builder \
-    .master("local[*]") \
-    .appName('sparknytaxi') \
-    .getOrCreate()
-
-#setting up script for parquetizing
-def parquetize_data(schema_file, csv_file):
-    df_parquetized = spark.read \
-    .option("header", "true") \
-    .schema(schema_file) \
-    .csv(csv_file)
-
-    df_parquetized = df_parquetized.repartition(24)
-    df.write.parquet("media/rafzul/'Terminal Dogma'/nytaxidata/raw/{TAXI_TYPE}/{YEAR}/{MONTH}")
-
-
 #setting up DAG
 default_args = {"owner": "rafzul",
     "start_date": datetime(2020,1,1),
-    "end_date": datetime(2020,2,1)
-    "schedule_interval"="@monthly",
+    "end_date": datetime(2020,2,1),
+    "schedule_interval": "@monthly",
     "depends_on_past": False,
     "retries": 1}
 
@@ -72,11 +55,11 @@ with DAG(
     schema_file = Path(f"../schemas/nytaxi_schema_{TAXI_TYPE}")
    
     parquetize_data_task = PythonOperator(
-        task_id="parquetize_dataaa",
+        task_id="parquetize_data",
         python_callable=parquetize_data,
         op_kwargs={
             "schema": schema_file,
-            "csv_file": ,
+            "csv_file": LOCAL_PATH,
         },
     )
     download_data_task >> parquetize_data_task
