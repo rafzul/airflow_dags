@@ -10,6 +10,7 @@ spark = SparkSession.builder \
     .master("local[*]") \
     .appName('sparknytaxi') \
     .getOrCreate()
+    
 
 #setting up script for parquetizing
 def parquetize_data(schema_file, csv_file):
