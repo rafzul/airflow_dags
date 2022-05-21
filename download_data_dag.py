@@ -55,18 +55,18 @@ with DAG(
             params= {"URL": URL,"LOCAL_PREFIX": LOCAL_PREFIX, "LOCAL_PATH": LOCAL_PATH},        
         )
 
-        with open(SCHEMA_FILEPATH, 'r') as schema_file:
-            #read the schema file content
-            schema_string = schema_file.read()
-            #call the parquetizing function
-            parquetize_data_task = PythonOperator(
-                task_id="parquetize_data",
-                python_callable=parquetize_data,
-                op_kwargs={
-                    "schema": schema_file,
-                    "csv_file": LOCAL_PATH,
-                },
-            )
+        # with open(SCHEMA_FILEPATH, 'r') as schema_file:
+        #     #read the schema file content
+        #     schema_string = schema_file.read()
+        #     #call the parquetizing function
+        #     parquetize_data_task = PythonOperator(
+        #         task_id="parquetize_data",
+        #         python_callable=parquetize_data,
+        #         op_kwargs={
+        #             "schema": schema_file,
+        #             "csv_file": LOCAL_PATH,
+        #         },
+        #     )
 
 
     download_data_task >> parquetize_data_task
