@@ -1,7 +1,7 @@
 from airflow.operators.bash import BashOperator
 from airflow.models import DAG
 from datetime import datetime
-from scripts.parquetizing import parquetize_data
+from scripts.parquetizing_data import parquetize_data
 
 #file path, url and type setup
 
