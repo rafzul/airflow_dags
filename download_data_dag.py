@@ -7,8 +7,8 @@ from datetime import datetime
 
 #getting month and year
 logical_date = "{{ ds }}"
-MONTH = "{{ ds.strptime("%m") }}"
-YEAR = "{{ ds.strptime("%Y") }}"
+MONTH = "{{ datetime.strptime(ds, "%m") }}"
+YEAR = "{{ datetime.strptime(ds, "%Y") }}"
 
 #setting up Bash parametrization
 URL_PREFIX="https://s3.amazonaws.com/nyc-tlc/trip+data"
