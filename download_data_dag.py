@@ -1,6 +1,7 @@
 from airflow.operators.bash import BashOperator
 from airflow.models import DAG
 from datetime import datetime
+from airflow.utils.task_group import TaskGroup
 # from scripts.parquetizing_data import parquetize_data
 
 #file path, url and type setup
@@ -50,7 +51,7 @@ with DAG(
 
     for TAXI_TYPE in {"yellow","green"}:
         with TaskGroup(group_id=f"download_&_parquetize_{TAXI_TYPE}") as tg1:
-            download_data_task = BashOperator(
+            download_data_task = BashOperator   (
                 task_id='download_data',
                 bash_command=BASH_DATADOWNLOAD,
                 params= {"URL": URL,"LOCAL_PREFIX": LOCAL_PREFIX, "LOCAL_PATH": LOCAL_PATH},        
