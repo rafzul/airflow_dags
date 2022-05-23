@@ -22,7 +22,7 @@ BASH_DATADOWNLOAD="/scripts/download_data.sh"
 #setup download_data path
 # FMONTH= `printf "%02d" ${MONTH}`
 URL="${URL_PREFIX}/${TAXI_TYPE}_tripdata_${YEAR}-${FMONTH}.csv"
-LOCAL_PREFIX="/media/rafzul/'Terminal Dogma'/nytax idata/raw/${TAXI_TYPE}/${YEAR}/${MONTH}"
+LOCAL_PREFIX="/media/rafzul/'Terminal Dogma'/nytaxidata/raw/${TAXI_TYPE}/${YEAR}/${MONTH}"
 LOCAL_FILE="${TAXI_TYPE}_tripdata_${YEAR}-${FMONTH}.csv"
 LOCAL_PATH="${LOCAL_PREFIX}/${LOCAL_FILE}"
 
@@ -37,8 +37,8 @@ default_args = {"owner": "rafzul",
     "start_date": pendulum.datetime(2020, 1, 1, tz="UTC"),
     "end_date": pendulum.datetime(2020, 2, 1, tz="UTC"),
     "schedule_interval": "@monthly",
-    "depends_on_past": True,
-    "retries": 2}
+    "depends_on_past": False,
+    "retries": 1}
 
 
 with DAG(
