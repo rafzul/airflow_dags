@@ -49,27 +49,29 @@ with DAG(
     # for MONTH in {1..12}: ini didefine di schedule_interval buat jaraknya, trus define start_date dan end_date buat start dan mulenya
 
     for TAXI_TYPE in {"yellow","green"}:
-        download_data_task = BashOperator(
-            task_id='download_data',
-            bash_command=BASH_DATADOWNLOAD,
-            params= {"URL": URL,"LOCAL_PREFIX": LOCAL_PREFIX, "LOCAL_PATH": LOCAL_PATH},        
-        )
+        with TaskGroup(group_id=f"download_&_parquetize_{TAXI_TYPE}") as tg1:
+            download_data_task = BashOperator(
+                task_id='download_data',
+                bash_command=BASH_DATADOWNLOAD,
+                params= {"URL": URL,"LOCAL_PREFIX": LOCAL_PREFIX, "LOCAL_PATH": LOCAL_PATH},        
+            )
 
-        # with open(SCHEMA_FILEPATH, 'r') as schema_file:
-        #     #read the schema file content
-        #     schema_string = schema_file.read()
-        #     #call the parquetizing function
-        #     parquetize_data_task = PythonOperator(
-        #         task_id="parquetize_data",
-        #         python_callable=parquetize_data,
-        #         op_kwargs={
-        #             "schema": schema_file,
-        #             "csv_file": LOCAL_PATH,
-        #         },
-        #     )
+            # with open(SCHEMA_FILEPATH, 'r') as schema_file:
+            #     #read the schema file content
+            #     schema_string = schema_file.read()    
+            #     #call the parquetizing function
+            #     parquetize_data_task = PythonOperator(
+            #         task_id="parquetize_data",
+            #         python_callable=parquetize_data,
+            #         op_kwargs={
+            #             "schema": schema_file,
+            #             "csv_file": LOCAL_PATH,
+            #         },
+            #     )
+            download_data_task
 
 
-    download_data_task >> parquetize_data_task
+    # download_data_task >> parquetize_data_task
 
 
 
