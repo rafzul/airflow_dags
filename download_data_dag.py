@@ -15,7 +15,7 @@ YEAR = "{{ dag_run.logical_date.strptime('%Y') }}"
 URL_PREFIX="https://s3.amazonaws.com/nyc-tlc/trip+data"
 
 #setup download data script path
-BASH_DATADOWNLOAD="../scripts/download_data.sh"
+BASH_DATADOWNLOAD="/scripts/download_data.sh"
 
 #setup download_data path
 # FMONTH= `printf "%02d" ${MONTH}`
@@ -28,21 +28,21 @@ LOCAL_PATH="${LOCAL_PREFIX}/${LOCAL_FILE}"
 SCHEMA_FILEPATH="/schemas/nytaxi_schema_{TAXI_TYPE}"
 
 #setting up external script path
-EXTSCRIPT_PATH = "../scripts/"
+EXTSCRIPT_PATH = "/scripts/"
 
 #setting up DAG
 default_args = {"owner": "rafzul",
     "start_date": datetime(2020,1,1),
     "end_date": datetime(2020,2,1),
     "schedule_interval": "@monthly",
-    "depends_on_past": False,
-    "retries": 1}
+    "depends_on_past": True,
+    "retries": 2}
 
 
 with DAG(
     dag_id="download_dag",
     default_args=default_args,
-    catchup=False,
+    catchup=True,
     max_active_runs=3,      
     tags=['nytaxi-dag'],
 ) as dag:
