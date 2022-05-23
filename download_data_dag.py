@@ -2,6 +2,8 @@ from airflow.operators.bash import BashOperator
 from airflow.models import DAG
 from datetime import datetime
 from airflow.utils.task_group import TaskGroup
+import datetime
+import pendulum
 # from scripts.parquetizing_data import parquetize_data
 
 #file path, url and type setup
@@ -32,8 +34,8 @@ EXTSCRIPT_PATH = "/scripts/"
 
 #setting up DAG
 default_args = {"owner": "rafzul",
-    "start_date": datetime(2020,1,1),
-    "end_date": datetime(2020,2,1),
+    "start_date": pendulum.datetime(2020, 1, 1, tz="UTC"),
+    "end_date": pendulum.datetime(2020, 2, 1, tz="UTC"),
     "schedule_interval": "@monthly",
     "depends_on_past": True,
     "retries": 2}
@@ -43,7 +45,7 @@ with DAG(
     dag_id="download_dag",
     default_args=default_args,
     catchup=True,
-    max_active_runs=3,      
+    max_active_runs=2,      
     tags=['nytaxi-dag'],
 ) as dag:
 
