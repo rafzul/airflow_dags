@@ -35,15 +35,15 @@ EXTSCRIPT_PATH = "/scripts/"
 #setting up DAG
 default_args = {"owner": "rafzul",
     "start_date": pendulum.datetime(2020, 1, 1, tz="UTC"),
-    "end_date": pendulum.datetime(2020, 2, 1, tz="UTC"),
-    "schedule_interval": "@monthly",
+    "end_date": pendulum.datetime(2020, 3, 1, tz="UTC"),
+    "schedule_interval": '@monthly',
     "depends_on_past": False,
     "retries": 1}
 
 
 with DAG(
     dag_id="download_dag",
-    default_args=default_args,
+    default_args=default_args,  
     catchup=True,
     max_active_runs=2,      
     tags=['nytaxi-dag'],
@@ -52,6 +52,7 @@ with DAG(
     # for MONTH in {1..12}: ini didefine di schedule_interval buat jaraknya, trus define start_date dan end_date buat start dan mulenya
 
     for TAXI_TYPE in {"yellow","green"}:
+        LOCAL_PREFIX="/media/rafzul/'Terminal Dogma'/nytaxidata/raw/${TAXI_TYPE}/${YEAR}/${MONTH}"
         with TaskGroup(group_id=f"downloadparquetizegroup_{TAXI_TYPE}") as tg1:
             download_data_task = BashOperator   (
                 task_id='download_data',
