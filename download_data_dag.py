@@ -35,16 +35,15 @@ EXTSCRIPT_PATH = "/scripts/"
 #setting up DAG
 default_args = {"owner": "rafzul",
     "start_date": pendulum.datetime(2020, 1, 1, tz="UTC"),
-    "end_date": pendulum.datetime(2020, 3, 1, tz="UTC"),
     "schedule_interval": '@monthly',
-    "depends_on_past": False,
+    "depends_on_past": True,
     "retries": 1}
 
 
 with DAG(
     dag_id="download_dag",
     default_args=default_args,  
-    catchup=True,
+    catchup=False,
     max_active_runs=2,      
     tags=['nytaxi-dag'],
 ) as dag:
