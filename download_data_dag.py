@@ -44,7 +44,7 @@ with DAG(
     dag_id="download_dag",
     default_args=default_args,
     schedule_interval="@monthly",  
-    catchup=False,
+    catchup=True,
     max_active_runs=2,      
     tags=['nytaxi-dag'],
 ) as dag:
