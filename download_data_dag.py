@@ -35,7 +35,7 @@ EXTSCRIPT_PATH = "/scripts/"
 #setting up DAG
 default_args = {"owner": "rafzul",
     "start_date": pendulum.datetime(2020, 1, 1, tz="UTC"),
-    "schedule_interval": "0 0 1 * *",
+    "schedule_interval": "@monthly",
     "depends_on_past": True,
     "retries": 1}
 
@@ -46,7 +46,7 @@ with DAG(
     catchup=False,
     max_active_runs=2,      
     tags=['nytaxi-dag'],
-    schedule_interval= "0 0 1 * *",
+    schedule_interval= "@monthly",
 ) as dag:
 
     # for MONTH in {1..12}: ini didefine di schedule_interval buat jaraknya, trus define start_date dan end_date buat start dan mulenya
