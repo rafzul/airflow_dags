@@ -17,7 +17,7 @@ YEAR = "{{ dag_run.logical_date.strptime('%Y') }}"
 URL_PREFIX="https://s3.amazonaws.com/nyc-tlc/trip+data"
 
 #setup download data script path
-BASH_DATADOWNLOAD="/scripts/download_data.sh"
+BASH_DATADOWNLOAD="/opt/airflow/dags/repo/scripts/download_data.sh"
 
 #setup download_data path
 # FMONTH= `printf "%02d" ${MONTH}`
