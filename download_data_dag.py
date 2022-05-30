@@ -52,7 +52,7 @@ with DAG(
     # for MONTH in {1..12}: ini didefine di schedule_interval buat jaraknya, trus define start_date dan end_date buat start dan mulenya
 
     for TAXI_TYPE in {"yellow","green"}:
-        LOCAL_PREFIX="/media/rafzul/'Terminal Dogma'/nytaxidata/raw/${TAXI_TYPE}/${YEAR}/${MONTH}"
+        LOCAL_PREFIX="/var/lib/rancher/k3s/storage/nytaxidata/${TAXI_TYPE}/${YEAR}/${MONTH}"
         with TaskGroup(group_id=f"downloadparquetizegroup_{TAXI_TYPE}") as tg1:
             download_data_task = BashOperator   (
                 task_id='download_data',
