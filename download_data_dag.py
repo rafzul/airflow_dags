@@ -22,7 +22,7 @@ BASH_DATADOWNLOAD="/scripts/download_data.sh"
 #setup download_data path
 # FMONTH= `printf "%02d" ${MONTH}`
 URL="${URL_PREFIX}/${TAXI_TYPE}_tripdata_${YEAR}-${FMONTH}.csv"
-LOCAL_PREFIX="/media/rafzul/'Terminal Dogma'/nytaxidata/raw/${TAXI_TYPE}/${YEAR}/${MONTH}"
+LOCAL_PREFIX="/var/lib/rancher/k3s/storage/nytaxidata/${TAXI_TYPE}/${YEAR}/${MONTH}"
 LOCAL_FILE="${TAXI_TYPE}_tripdata_${YEAR}-${FMONTH}.csv"
 LOCAL_PATH="${LOCAL_PREFIX}/${LOCAL_FILE}"
 
