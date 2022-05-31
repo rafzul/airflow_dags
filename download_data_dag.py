@@ -22,15 +22,15 @@ BASH_DATADOWNLOAD="/opt/airflow/dags/repo/scripts/download_data.sh"
 #setup download_data path
 # FMONTH= `printf "%02d" ${MONTH}`
 URL="${URL_PREFIX}/${TAXI_TYPE}_tripdata_${YEAR}-${FMONTH}.csv"
-LOCAL_PREFIX="/var/lib/rancher/k3s/storage/nytaxidata/${TAXI_TYPE}/${YEAR}/${MONTH}"
+LOCAL_PREFIX="/tmp/nytaxidata/${TAXI_TYPE}/${YEAR}/${MONTH}"
 LOCAL_FILE="${TAXI_TYPE}_tripdata_${YEAR}-${FMONTH}.csv"
 LOCAL_PATH="${LOCAL_PREFIX}/${LOCAL_FILE}"
 
 #schema file path setup
-SCHEMA_FILEPATH="/schemas/nytaxi_schema_{TAXI_TYPE}"
+SCHEMA_FILEPATH="/opt/airflow/dags/repo/schemas/nytaxi_schema_{TAXI_TYPE}"
 
-#setting up external script path
-EXTSCRIPT_PATH = "/scripts/"
+# #setting up external script path
+# EXTSCRIPT_PATH = "/scripts/"
 
 #setting up DAG
 default_args = {"owner": "rafzul",
@@ -52,7 +52,6 @@ with DAG(
     # for MONTH in {1..12}: ini didefine di schedule_interval buat jaraknya, trus define start_date dan end_date buat start dan mulenya
 
     for TAXI_TYPE in {"yellow","green"}:
-        LOCAL_PREFIX="/var/lib/rancher/k3s/storage/nytaxidata/${TAXI_TYPE}/${YEAR}/${MONTH}"
         with TaskGroup(group_id=f"downloadparquetizegroup_{TAXI_TYPE}") as tg1:
             download_data_task = BashOperator   (
                 task_id='download_data',
