@@ -26,8 +26,6 @@ LOCAL_PREFIX="/tmp/nytaxidata/${TAXI_TYPE}/${YEAR}/${MONTH}"
 LOCAL_FILE="${TAXI_TYPE}_tripdata_${YEAR}-${FMONTH}.csv"
 LOCAL_PATH="${LOCAL_PREFIX}/${LOCAL_FILE}"
 
-#schema file path setup
-SCHEMA_FILEPATH="/opt/airflow/dags/repo/schemas/nytaxi_schema_{TAXI_TYPE} "
 
 # #setting up external script path
 # EXTSCRIPT_PATH = "/scripts/"
@@ -53,9 +51,9 @@ with DAG(
 
     for TAXI_TYPE in {"yellow","green"}:
         with TaskGroup(group_id=f"downloadparquetizegroup_{TAXI_TYPE}") as tg1:
-            download_data_task = BashOperator   (
+            download_data_task = BashOperator(
                 task_id='download_data',
-                bash_command=BASH_DATADOWNLOAD,
+                bash_command='/opt/airflow/dags/repo/schemas/nytaxi_schema_{TAXI_TYPE} ',
                 params= {"URL": URL,"LOCAL_PREFIX": LOCAL_PREFIX, "LOCAL_PATH": LOCAL_PATH},        
             )
 
