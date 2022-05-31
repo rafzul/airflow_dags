@@ -27,7 +27,7 @@ LOCAL_FILE="${TAXI_TYPE}_tripdata_${YEAR}-${FMONTH}.csv"
 LOCAL_PATH="${LOCAL_PREFIX}/${LOCAL_FILE}"
 
 #schema file path setup
-SCHEMA_FILEPATH="/opt/airflow/dags/repo/schemas/nytaxi_schema_{TAXI_TYPE}"
+SCHEMA_FILEPATH="/opt/airflow/dags/repo/schemas/nytaxi_schema_{TAXI_TYPE} "
 
 # #setting up external script path
 # EXTSCRIPT_PATH = "/scripts/"
