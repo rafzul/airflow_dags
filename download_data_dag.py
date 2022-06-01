@@ -37,7 +37,7 @@ LOCAL_PATH="${LOCAL_PREFIX}/${LOCAL_FILE}"
 default_args = {"owner": "rafzul",
     "start_date": pendulum.datetime(2020, 1, 1, tz="UTC"),
     "end_date": pendulum.datetime(2020, 3, 1, tz="UTC"),
-    "depends_on_past": True,
+    "depends_on_past": False,
     "retries": 1}
 
 
