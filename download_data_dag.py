@@ -57,7 +57,7 @@ with DAG(
             download_data_task = BashOperator(
                 task_id='download_data',
                 bash_command='/opt/airflow/dags/repo/scripts/download_data.sh ',
-                params= {"URL": URL,"LOCAL_PREFIX": LOCAL_PREFIX, "LOCAL_PATH": LOCAL_PATH},        
+                env = {"URL": URL,"LOCAL_PREFIX": LOCAL_PREFIX, "LOCAL_PATH": LOCAL_PATH},        
             )
 
             # with open(SCHEMA_FILEPATH, 'r') as schema_file:
