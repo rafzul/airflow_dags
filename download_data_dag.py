@@ -50,9 +50,9 @@ with DAG(
 
     for TAXI_TYPE in {"yellow","green"}:
         #setup templating
-        URL=f"{URL_PREFIX}/{TAXI_TYPE}_tripdata_{YEAR}-{FMONTH}.csv"
+        URL=f"{URL_PREFIX}/{TAXI_TYPE}_tripdata_{YEAR}-{MONTH}.csv"
         LOCAL_PREFIX=f"/tmp/nytaxidata/{TAXI_TYPE}/{YEAR}/{MONTH}"
-        LOCAL_FILE=f"{TAXI_TYPE}_tripdata_{YEAR}-{FMONTH}.csv"
+        LOCAL_FILE=f"{TAXI_TYPE}_tripdata_{YEAR}-{MONTH}.csv"
         LOCAL_PATH=f"{LOCAL_PREFIX}/{LOCAL_FILE}"
 
         with TaskGroup(group_id=f"downloadparquetizegroup_{TAXI_TYPE}") as tg1:
