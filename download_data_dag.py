@@ -10,8 +10,8 @@ import pendulum
 
 #getting month and year
 # logical_date = "{{ ds }}"
-MONTH = "{{ dag_run.logical_date.strptime('%m') }}"
-YEAR = "{{ dag_run.logical_date.strptime('%Y') }}"
+MONTH = "{{ macros.ds_format(ds, "%Y-%m-%d", "%m") }}"
+YEAR = "{{ macros.ds_format(ds, "%Y-%m-%d", "%Y") }}"
 
 #setting up Bash parametrization
 URL_PREFIX="https://s3.amazonaws.com/nyc-tlc/trip+data"
