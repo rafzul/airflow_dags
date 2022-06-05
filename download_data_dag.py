@@ -1,5 +1,6 @@
 from airflow.operators.bash import BashOperator
-from airflow.models import DAG, macros
+from airflow.models import DAG
+from airflow import macros
 from datetime import datetime
 from airflow.utils.task_group import TaskGroup
 import datetime
