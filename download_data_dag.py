@@ -9,7 +9,7 @@ import pendulum
 #file path, url and type setup
 
 #getting month and year
-logical_date = "{{ ds }}"
+# logical_date = "{{ ds }}"
 MONTH = "{{ dag_run.logical_date.strptime('%m') }}"
 YEAR = "{{ dag_run.logical_date.strptime('%Y') }}"
 
