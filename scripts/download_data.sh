@@ -3,9 +3,9 @@
 
 set -e 
 
-echo "downloading ${URL} to ${LOCAL_PATH}"
-mkdir -p "${LOCAL_PREFIX}"
-wget "${URL} -O ${LOCAL_PATH}"
+echo "downloading {{ params.URL }} to {{ params.LOCAL_PATH }}"
+mkdir -p "{{ params.LOCAL_PREFIX }}"
+wget "{{ params.URL }} -O {{ params.LOCAL_PATH }}"
 
-echo "compressing ${LOCAL_PATH}"
+echo "compressing {{ params.LOCAL_PATH }}"
 gzip

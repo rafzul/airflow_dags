@@ -21,10 +21,10 @@ BASH_DATADOWNLOAD="/opt/airflow/dags/repo/scripts/download_data.sh"
 
 #setup download_data path
 # FMONTH= `printf "%02d" ${MONTH}`
-URL="${URL_PREFIX}/${TAXI_TYPE}_tripdata_${YEAR}-${FMONTH}.csv"
-LOCAL_PREFIX="/tmp/nytaxidata/${TAXI_TYPE}/${YEAR}/${MONTH}"
-LOCAL_FILE="${TAXI_TYPE}_tripdata_${YEAR}-${FMONTH}.csv"
-LOCAL_PATH="${LOCAL_PREFIX}/${LOCAL_FILE}"
+URL=f"{URL_PREFIX}/{TAXI_TYPE}_tripdata_{YEAR}-{FMONTH}.csv"
+LOCAL_PREFIX=f"/tmp/nytaxidata/{TAXI_TYPE}/{YEAR}/{MONTH}"
+LOCAL_FILE=f"{TAXI_TYPE}_tripdata_{YEAR}-{FMONTH}.csv"
+LOCAL_PATH=f"{LOCAL_PREFIX}/{LOCAL_FILE}"
 
 #schemas
 #/opt/airflow/dags/repo/schemas/nytaxi_schema_{TAXI_TYPE}
@@ -56,8 +56,8 @@ with DAG(
         with TaskGroup(group_id=f"downloadparquetizegroup_{TAXI_TYPE}") as tg1:
             download_data_task = BashOperator(
                 task_id='download_data',
-                bash_command='/opt/airflow/dags/repo/scripts/download_data.sh ',
-                env = {"URL": URL,"LOCAL_PREFIX": LOCAL_PREFIX, "LOCAL_PATH": LOCAL_PATH},        
+                bash_command='/scripts/download_data.sh',
+                params = {"URL": URL,"LOCAL_PREFIX": LOCAL_PREFIX, "LOCAL_PATH": LOCAL_PATH},        
             )
 
             # with open(SCHEMA_FILEPATH, 'r') as schema_file:
