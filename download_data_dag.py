@@ -11,8 +11,8 @@ import pendulum
 
 #getting month and year
 # logical_date = "{{ ds }}"
-MONTH = "{{ macros.ds_format(ds, "%Y-%m-%d", "%m") }}"
-YEAR = "{{ macros.ds_format(ds, "%Y-%m-%d", "%Y") }}"
+MONTH = """{{ macros.ds_format(ds, "%Y-%m-%d", "%m") }}"""
+YEAR = """{{ macros.ds_format(ds, "%Y-%m-%d", "%Y") }}"""
 
 #setting up Bash parametrization
 URL_PREFIX="https://s3.amazonaws.com/nyc-tlc/trip+data"
