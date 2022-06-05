@@ -3,6 +3,8 @@
 
 set -e 
 
+
+
 echo "downloading {{ params.URL }} to {{ params.LOCAL_PATH }}"
 mkdir -p "{{ params.LOCAL_PREFIX }}"
 wget "{{ params.URL }} -O {{ params.LOCAL_PATH }}"
