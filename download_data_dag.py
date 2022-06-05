@@ -9,10 +9,7 @@ import pendulum
 
 #file path, url and type setup
 
-#getting month and year
-# logical_date = "{{ ds }}"
-MONTH = """{{ macros.ds_format(ds, "%Y-%m-%d", "%m") }}"""
-YEAR = """{{ macros.ds_format(ds, "%Y-%m-%d", "%Y") }}"""
+
 
 #setting up Bash parametrization
 URL_PREFIX="https://s3.amazonaws.com/nyc-tlc/trip+data"
@@ -51,6 +48,12 @@ with DAG(
 
     for TAXI_TYPE in {"yellow","green"}:
         #setup templating
+
+        #getting month and year
+        # logical_date = "{{ ds }}"
+        MONTH = "{{ macros.ds_format(ds, "%Y-%m-%d", "%m") }}"
+        YEAR = "{{ macros.ds_format(ds, "%Y-%m-%d", "%Y") }}"
+        
         URL=f"{URL_PREFIX}/{TAXI_TYPE}_tripdata_{YEAR}-{MONTH}.csv"
         LOCAL_PREFIX=f"/tmp/nytaxidata/{TAXI_TYPE}/{YEAR}/{MONTH}"
         LOCAL_FILE=f"{TAXI_TYPE}_tripdata_{YEAR}-{MONTH}.csv"
