@@ -51,8 +51,8 @@ with DAG(
 
         #getting month and year
         # logical_date = "{{ ds }}"
-        MONTH = """{{ macros.ds_format(ds, "%Y-%m-%d", "%m") }}"""
-        YEAR = """{{ macros.ds_format(ds, "%Y-%m-%d", "%Y") }}"""
+        MONTH = f"""{{ macros.ds_format(ds, "%Y-%m-%d", "%m") }}"""
+        YEAR = f"""{{ macros.ds_format(ds, "%Y-%m-%d", "%Y") }}"""
 
         URL=f"{URL_PREFIX}/{TAXI_TYPE}_tripdata_{YEAR}-{MONTH}.csv"
         LOCAL_PREFIX=f"/tmp/nytaxidata/{TAXI_TYPE}/{YEAR}/{MONTH}"
