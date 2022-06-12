@@ -9,6 +9,27 @@ import pendulum
 
 #file path, url and type setup
 
+
+
+#setting up Bash parametrization
+URL_PREFIX="https://s3.amazonaws.com/nyc-tlc/trip+data"
+
+#setup download data script path
+BASH_DATADOWNLOAD="/opt/airflow/dags/repo/scripts/download_data.sh"
+
+#setup download_data path
+# FMONTH= `printf "%02d" ${MONTH}`
+
+#schemas
+#/opt/airflow/dags/repo/schemas/nytaxi_schema_{TAXI_TYPE}
+
+
+# #setting up external script path
+# EXTSCRIPT_PATH = "/scripts/"
+
+
+
+
 #setting up DAG
 default_args = {"owner": "rafzul",
     "start_date": pendulum.datetime(2020, 1, 1, tz="UTC"),
@@ -32,13 +53,14 @@ with DAG(
         #setup templating
 
         #getting month and year
-        MONTH='''{{ macros.ds_format(ds, "%Y-%m-%d", "%m") }}'''
-        YEAR=f'{{ macros.ds_format(ds, "%Y-%m-%d", "%Y") }}'
+        # logical_date = "{{ ds }}"
+        
 
         with TaskGroup(group_id=f"downloadparquetizegroup_{TAXI_TYPE}") as tg1:
             download_data_task = BashOperator(
                 task_id='download_data',
-                bash_command='/scripts/download_data.sh {{ TAXI_TYPE }} {{ MONTH }} {{ YEAR }}',      
+                bash_command='/scripts/download_data.sh',
+                params = {"TAXI_TYPE": TAXI_TYPE},        
             )
 
             # with open(SCHEMA_FILEPATH, 'r') as schema_file:

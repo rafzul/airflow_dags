@@ -3,11 +3,23 @@
 
 set -e 
 
+TAXI_TYPE=$1 #taxi_type
+MONTH=$2 #month
+YEAR=$3 #year
 
 
-echo "downloading {{ params.URL }} to {{ params.LOCAL_PATH }}"
-mkdir -p "{{ params.LOCAL_PREFIX }}"
-wget "{{ params.URL }} -O {{ params.LOCAL_PATH }}"
+#setting up Bash parametrization
+URL_PREFIX="https://s3.amazonaws.com/nyc-tlc/trip+data"
+export AIRFLOW_NAME="airflow-cluster"
+export AIRFLOW_NAMESPACE="airflow"
+URL="${URL_PREFIX}/${TAXI_TYPE}_tripdata_${YEAR}-${MONTH}.csv"
+LOCAL_PREFIX="/tmp/nytaxidata/${TAXI_TYPE}/${YEAR}/${MONTH}"
+LOCAL_FILE="${TAXI_TYPE}_tripdata_${YEAR}-${MONTH}.csv"
+LOCAL_PATH="${LOCAL_PREFIX}/${LOCAL_FILE}"
 
-echo "compressing {{ params.LOCAL_PATH }}"
+echo "downloading ${URL} to ${LOCAL_PATH}"
+mkdir -p ${LOCAL_PREFIX}
+wget "${URL} -O ${LOCAL_PATH}"
+
+echo "compressing ${LOCAL_PATH}"
 gzip
