@@ -3,8 +3,8 @@
 
 set -e 
 
-TAXI_TYPE=$1 #taxi_type
-MONTH=$2 #month
+TAXI_TYPE=$1 #taxi_type     
+MONTH=$2 #month     
 YEAR=$3 #year
 
 
