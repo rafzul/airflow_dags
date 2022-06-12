@@ -39,7 +39,7 @@ with DAG(
         with TaskGroup(group_id=f"downloadparquetizegroup_{TAXI_TYPE}") as tg1:
             download_data_task = BashOperator(
                 task_id="download_data",
-                bash_command="""/scripts/download_data.sh {{ TAXI_TYPE }} {{ MONTH }} {{ YEAR }} """,      
+                bash_command=f"/scripts/download_data.sh {TAXI_TYPE} {MONTH} {YEAR} ",      
             )
 
             # with open(SCHEMA_FILEPATH, 'r') as schema_file:
