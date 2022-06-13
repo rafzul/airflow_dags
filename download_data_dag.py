@@ -28,17 +28,17 @@ with DAG(
 
     # for MONTH in {1..12}: ini didefine di schedule_interval buat jaraknya, trus define start_date dan end_date buat start dan mulenya
 
-    for TAXI_TYPE in {"yellow","green"}:
+    for taxi_type in {"yellow","green"}:
         #setup templating
         #getting month and year
-        MONTH='{{ macros.ds_format(ds, "%Y-%m-%d", "%m") }}'
-        YEAR='{{ macros.ds_format(ds, "%Y-%m-%d", "%Y") }}'
+        month="{{ macros.ds_format(ds, "%Y-%m-%d", "%m") }}"
+        year="{{ macros.ds_format(ds, "%Y-%m-%d", "%Y") }}"
 
         with TaskGroup(group_id=f"downloadparquetizegroup_{TAXI_TYPE}") as tg1:
             download_data_task = BashOperator(
                 task_id="download_data",
                 bash_command=f"/scripts/download_data.sh",
-                env={'TAXI_TYPE': TAXI_TYPE,'MONTH':MONTH,'YEAR':YEAR},      
+                params={'TAXI_TYPE':taxi_type,'MONTH':month,'YEAR':year},    
             )
 
             # with open(SCHEMA_FILEPATH, 'r') as schema_file:
