@@ -32,14 +32,14 @@ with DAG(
         #setup templating
         #getting month and year
         # taxi_type=f"{taxi_type}"
-        month={{ macros.ds_format(ds, "%Y-%m-%d", "%m") }}
-        year={{ macros.ds_format(ds, "%Y-%m-%d", "%Y") }}
+        month='{{ macros.ds_format(ds, "%Y-%m-%d", "%m") }}'
+        year='{{ macros.ds_format(ds, "%Y-%m-%d", "%Y") }}'
 
         with TaskGroup(group_id=f"downloadparquetizegroup_{taxi_type}") as tg1:
             download_data_task = BashOperator(
                 task_id="download_data",
                 bash_command=f"/scripts/download_data.sh",
-                params={'TAXI_TYPE':taxi_type,'MONTH':month,'YEAR':year},    
+                env={'TAXI_TYPE':taxi_type,'MONTH':month,'YEAR':year},    
             )
 
             # with open(SCHEMA_FILEPATH, 'r') as schema_file:
