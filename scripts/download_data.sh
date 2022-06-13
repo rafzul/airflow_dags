@@ -2,11 +2,11 @@
 set -e 
 
 TAXI_TYPE='$TAXI_TYPE' #taxi_type     
-echo $TAXI_TYPE
+echo ${TAXI_TYPE}
 MONTH='$MONTH' #month
-echo $MONTH
+echo ${MONTH}
 YEAR='$YEAR' #year
-echo $YEAR
+echo ${YEAR}
 
         
 #setting up Bash parametrization
