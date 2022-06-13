@@ -28,8 +28,8 @@ with DAG(
 
     # for MONTH in {1..12}: ini didefine di schedule_interval buat jaraknya, trus define start_date dan end_date buat start dan mulenya
     taxi_type="green"
-    month='{{ macros.ds_format(ds, "%Y-%m-%d", "%m") }}'
-    year='{{ macros.ds_format(ds, "%Y-%m-%d", "%Y") }}'
+    month="{{ macros.ds_format(ds, "%Y-%m-%d", "%m") }}"
+    year="{{ macros.ds_format(ds, "%Y-%m-%d", "%Y") }}"
 
     download_data_task = BashOperator(
                 task_id="download_data_test",
