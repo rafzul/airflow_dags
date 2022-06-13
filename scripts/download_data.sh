@@ -28,7 +28,7 @@ LOCAL_PATH="${LOCAL_PREFIX}/${LOCAL_FILE}"
 
 echo "downloading ${URL} to ${LOCAL_PATH}"
 mkdir -p ${LOCAL_PREFIX}
-wget ${URL} -O ${LOCAL_PATH}
+curl -sSL ${URL} > ${LOCAL_PATH}
 
 echo "compressing ${LOCAL_PATH}"
 gzip ${LOCAL_PATH}
