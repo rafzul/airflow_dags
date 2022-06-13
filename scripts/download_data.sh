@@ -8,11 +8,11 @@ set -e
 # YEAR='$YEAR' #year
 # echo ${YEAR}
 
-TAXI_TYPE='$TAXI_TYPE'#taxi_type     
+TAXI_TYPE='$taxi_type'#taxi_type     
 echo ${TAXI_TYPE}
-MONTH='$MONTH' #month
+MONTH='$month' #month
 echo ${MONTH}
-YEAR='$YEAR' #year
+YEAR='$year' #year
 echo ${YEAR}
 
         

@@ -38,7 +38,7 @@ with DAG(
             download_data_task = BashOperator(
                 task_id="download_data",
                 bash_command="/scripts/download_data.sh",
-                env={'TAXI_TYPE':taxi_type,'MONTH':month,'YEAR':year},    
+                env={'taxi_type':taxi_type,'month':month,'year':year},    
             )
 
             # with open(SCHEMA_FILEPATH, 'r') as schema_file:
