@@ -1,9 +1,9 @@
 #!/bin/bash
 set -e 
 
-TAXI_TYPE={{ params.TAXI_TYPE }} #taxi_type     
-MONTH={{ params.MONTH }} #month     
-YEAR={{ params.YEAR }} #year
+TAXI_TYPE=$TAXI_TYPE #taxi_type     
+MONTH=$MONTH #month     
+YEAR=$YEAR #year
 
         
 #setting up Bash parametrization
