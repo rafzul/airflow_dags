@@ -12,7 +12,7 @@ TAXI_TYPE='$taxi_type'#taxi_type
 echo ${TAXI_TYPE}
 MONTH='$month' #month
 echo ${MONTH}
-YEAR='$year' #year
+YEAR='$year' #years
 echo ${YEAR}
 
         
