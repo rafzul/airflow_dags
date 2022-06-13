@@ -27,18 +27,15 @@ with DAG(
 ) as dag:
 
     # for MONTH in {1..12}: ini didefine di schedule_interval buat jaraknya, trus define start_date dan end_date buat start dan mulenya
+    TAXI_TYPE="green"
+    MONTH='{{ macros.ds_format(ds, "%Y-%m-%d", "%m") }}'
+    YEAR='{{ macros.ds_format(ds, "%Y-%m-%d", "%Y") }}'
 
-    for TAXI_TYPE in {"yellow","green"}:
-        #setup templating
-        #getting month and year
-        MONTH='{{ macros.ds_format(ds, "%Y-%m-%d", "%m") }}'
-        YEAR='{{ macros.ds_format(ds, "%Y-%m-%d", "%Y") }}'
-
-        download_data_task = BashOperator(
+    download_data_task = BashOperator(
                 task_id="download_data_test",
                 bash_command=f"/scripts/download_data.sh",
                 env={'TAXI_TYPE': TAXI_TYPE,'MONTH':MONTH,'YEAR':YEAR},      
-            )
+    )
 
 
             # with open(SCHEMA_FILEPATH, 'r') as schema_file:
@@ -53,7 +50,12 @@ with DAG(
             #             "csv_file": LOCAL_PATH,
             #         },
             #     )
-        download_data_task
+    download_data_task
+
+    for TAXI_TYPE in {"yellow","green"}:
+        #setup templating
+        #getting month and year
+        
 
 
     # download_data_task >> parquetize_data_task
