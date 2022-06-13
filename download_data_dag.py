@@ -31,8 +31,8 @@ with DAG(
     for TAXI_TYPE in {"yellow","green"}:
         #setup templating
         #getting month and year
-        MONTH='''{{ macros.ds_format(ds, "%Y-%m-%d", "%m") }}'''
-        YEAR='''{{ macros.ds_format(ds, "%Y-%m-%d", "%Y") }}'''
+        MONTH='{{ macros.ds_format(ds, "%Y-%m-%d", "%m") }}'
+        YEAR='{{ macros.ds_format(ds, "%Y-%m-%d", "%Y") }}'
 
         with TaskGroup(group_id=f"downloadparquetizegroup_{TAXI_TYPE}") as tg1:
             download_data_task = BashOperator(
