@@ -37,7 +37,7 @@ with DAG(
         with TaskGroup(group_id=f"downloadparquetizegroup_{taxi_type}") as tg1:
             download_data_task = BashOperator(
                 task_id="download_data",
-                bash_command=f"/scripts/download_data.sh",
+                bash_command="/scripts/download_data.sh",
                 env={'TAXI_TYPE':taxi_type,'MONTH':month,'YEAR':year},    
             )
 
