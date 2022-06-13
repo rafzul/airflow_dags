@@ -30,7 +30,6 @@ with DAG(
 
     for TAXI_TYPE in {"yellow","green"}:
         #setup templating
-        TAXI_TYPE=TAXI_TYPE
         #getting month and year
         MONTH='''{{ macros.ds_format(ds, "%Y-%m-%d", "%m") }}'''
         YEAR='''{{ macros.ds_format(ds, "%Y-%m-%d", "%Y") }}'''
