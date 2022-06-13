@@ -1,11 +1,18 @@
 #!/bin/bash
 set -e 
 
-TAXI_TYPE='$TAXI_TYPE' #taxi_type     
+# TAXI_TYPE='$TAXI_TYPE' #taxi_type     
+# echo ${TAXI_TYPE}
+# MONTH='$MONTH' #month
+# echo ${MONTH}
+# YEAR='$YEAR' #year
+# echo ${YEAR}
+
+TAXI_TYPE={{ params.TAXI_TYPE }} #taxi_type     
 echo ${TAXI_TYPE}
-MONTH='$MONTH' #month
+MONTH={{ params.MONTH }} #month
 echo ${MONTH}
-YEAR='$YEAR' #year
+YEAR={{ params.YEAR }} #year
 echo ${YEAR}
 
         
