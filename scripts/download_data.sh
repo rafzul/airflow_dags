@@ -22,7 +22,7 @@ URL_PREFIX="https://s3.amazonaws.com/nyc-tlc/trip+data"
 #tiba2 file extensionnya berubah dari csv jadi parquet???
 URL="${URL_PREFIX}/${TAXI_TYPE}_tripdata_${YEAR}-${MONTH}.parquet"
 
-LOCAL_PREFIX="/tmp/nytaxidata/${TAXI_TYPE}/${YEAR}/${MONTH}"
+LOCAL_PREFIX="/var/lib/rancher/k3s/storage/nytaxidata/${TAXI_TYPE}/${YEAR}/${MONTH}"
 LOCAL_FILE="${TAXI_TYPE}_tripdata_${YEAR}-${MONTH}.parquet"
 LOCAL_PATH="${LOCAL_PREFIX}/${LOCAL_FILE}"
 
