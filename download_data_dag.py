@@ -10,11 +10,13 @@ import pendulum
 #file path, url and type setup
 
 #setting up DAG
-default_args = {"owner": "rafzul",
+default_args = {
+    "owner": "rafzul",
     "start_date": pendulum.datetime(2020, 1, 1, tz="UTC"),
     "end_date": pendulum.datetime(2020, 3, 1, tz="UTC"),
     "depends_on_past": False,
-    "retries": 1}
+    "retries": 1
+}
 
 
 with DAG(
@@ -57,6 +59,8 @@ with DAG(
 
 
     # download_data_task >> parquetize_data_task
+    
+    
 
 
 

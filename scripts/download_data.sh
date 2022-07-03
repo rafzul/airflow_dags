@@ -9,11 +9,8 @@ set -e
 # echo ${YEAR}
 
 TAXI_TYPE=$taxi_type
-echo ${TAXI_TYPE}
 MONTH=$month
-echo ${MONTH}
 YEAR=$year
-echo ${YEAR}
 
         
 #setting up Bash parametrization
@@ -31,4 +28,4 @@ mkdir -p ${LOCAL_PREFIX}
 curl -sSL ${URL} > ${LOCAL_PATH}
 
 echo "compressing ${LOCAL_PATH}"
-gzip ${LOCAL_PATH}
+# gzip ${LOCAL_PATH}
