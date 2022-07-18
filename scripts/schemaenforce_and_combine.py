@@ -5,9 +5,8 @@ import sys
 
 
 #setting up variables
-taxi_type = sys.argv[1]
-month = sys.argv[2]
-year = sys.argv[3]
+month = sys.argv[1]
+year = sys.argv[2]
 
 #setting files
 local_prefix=f"/tmp/nytaxidata/{taxi_type}/{year}/{month}"

@@ -28,26 +28,25 @@ with DAG(
     tags=['nytaxi-dag'],
 ) as dag:
 
-    # for MONTH in {1..12}: ini didefine di schedule_interval buat jaraknya, trus define start_date dan end_date buat start dan mulenya
-
+    #setup templating
+    #getting month and year
+    month='{{ macros.ds_format(ds, "%Y-%m-%d", "%m") }}'
+    year='{{ macros.ds_format(ds, "%Y-%m-%d", "%Y") }}'
+    
+    #download data task
     for taxi_type in {"yellow","green"}:
-        #setup templating
-        #getting month and year
-        month='{{ macros.ds_format(ds, "%Y-%m-%d", "%m") }}'
-        year='{{ macros.ds_format(ds, "%Y-%m-%d", "%Y") }}'
-        
         download_data_task = BashOperator(
-                task_id=f"download_data_{taxi_type}",
-                bash_command="/scripts/download_data.sh",
-                env={'taxi_type':taxi_type,'month':month,'year':year},    
-            )
-            
-            
-            # enforce_schema_task = SparkSubmitOperator(
-            #     task_id="enforce_schema",
-            #     application="/scripts/schema_enforcement.py",
-            #     application_args=[taxi_type,month,year],
-            # )
+            task_id=f"download_data_{taxi_type}",
+            bash_command="/scripts/download_data.sh",
+            env={'taxi_type':taxi_type,'month':month,'year':year},    
+        )
+    
+    #enforce schema and combine data
+    enforce_schema_task = SparkSubmitOperator(
+        task_id="enforce_schema",
+        application="/scripts/schemaenforce_and_combine.py",
+        application_args=[month,year],
+    )
             
         # combine_data_task = SparkSubmitOperator
         
@@ -63,7 +62,7 @@ with DAG(
             #             "csv_file": LOCAL_PATH,
             #         },
             #     )
-        download_data_task
+    download_data_task >> enforce_schema_task
 
 
     # download_data_task >> parquetize_data_task
