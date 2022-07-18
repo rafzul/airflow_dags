@@ -35,14 +35,22 @@ with DAG(
         #getting month and year
         month='{{ macros.ds_format(ds, "%Y-%m-%d", "%m") }}'
         year='{{ macros.ds_format(ds, "%Y-%m-%d", "%Y") }}'
-
-        with TaskGroup(group_id=f"downloadparquetizegroup_{taxi_type}") as tg1:
-            download_data_task = BashOperator(
-                task_id="download_data",
+        
+        download_data_task = BashOperator(
+                task_id=f"download_data_{taxi_type}",
                 bash_command="/scripts/download_data.sh",
                 env={'taxi_type':taxi_type,'month':month,'year':year},    
             )
-
+            
+            
+            # enforce_schema_task = SparkSubmitOperator(
+            #     task_id="enforce_schema",
+            #     application="/scripts/schema_enforcement.py",
+            #     application_args=[taxi_type,month,year],
+            # )
+            
+        # combine_data_task = SparkSubmitOperator
+        
             # with open(SCHEMA_FILEPATH, 'r') as schema_file:
             #     #read the schema file content
             #     schema_string = schema_file.read()    
@@ -55,7 +63,7 @@ with DAG(
             #             "csv_file": LOCAL_PATH,
             #         },
             #     )
-            download_data_task
+        download_data_task
 
 
     # download_data_task >> parquetize_data_task

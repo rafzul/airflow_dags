@@ -1,0 +1,15 @@
+#virtualenv
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+#largefile
+*.tgz
+*.zip
+
+# spark-3.0.3-bin-hadoop2.7.tgz
+# venv.zip
