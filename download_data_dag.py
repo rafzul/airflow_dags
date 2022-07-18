@@ -5,6 +5,7 @@ from datetime import datetime
 from airflow.utils.task_group import TaskGroup
 import datetime
 import pendulum
+  from airflow.providers.apache.spark.operators.spark_submit import SparkSubmitOperator 
 # from scripts.parquetizing_data import parquetize_data
 
 #file path, url and type setup
