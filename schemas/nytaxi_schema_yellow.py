@@ -1,4 +1,28 @@
-types.StructType([
+green_schema = types.StructType([
+    StructField(VendorID,LongType,true),
+    StructField(lpep_pickup_datetime,TimestampType,true),
+    StructField(lpep_dropoff_datetime,TimestampType,true),
+    StructField(store_and_fwd_flag,StringType,true),
+    StructField(RatecodeID,DoubleType,true),
+    StructField(PULocationID,LongType,true),
+    StructField(DOLocationID,LongType,true),
+    StructField(passenger_count,DoubleType,true),
+    StructField(trip_distance,DoubleType,true),
+    StructField(fare_amount,DoubleType,true),
+    StructField(extra,DoubleType,true),
+    StructField(mta_tax,DoubleType,true),
+    StructField(tip_amount,DoubleType,true),
+    StructField(tolls_amount,DoubleType,true),
+    StructField(ehail_fee,IntegerType,true),
+    StructField(improvement_surcharge,DoubleType,true),
+    StructField(total_amount,DoubleType,true),
+    StructField(payment_type,DoubleType,true),
+    StructField(trip_type,DoubleType,true),
+    StructField(congestion_surcharge,DoubleType,true)
+])
+
+#ini bukan yellow keknya deh
+yellow_schema = types.StructType([
     types.StructField("VendorID", types.IntegerType(), True),
     types.StructField("lpep_pickup_datetime", types.TimestampType(), True),
     types.StructField("lpep_dropoff_datetime", types.TimestampType(), True),

@@ -6,10 +6,13 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+testenv/
 
 #largefile
+*tar.gz
 *.tgz
 *.zip
+spark-3.0.3-bin-hadoop2.7/
 
 # spark-3.0.3-bin-hadoop2.7.tgz
 # venv.zip

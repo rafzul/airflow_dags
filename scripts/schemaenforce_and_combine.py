@@ -14,10 +14,11 @@ local_file=f"{taxi_type}_tripdata_{year}-{month}.parquet"
 local_path=f"{local_prefix}/{local_file}"
 
 #setting schema
-if taxi_type = "green":
-    schema = green_schema
-else:
-    schema = yellow_schema
+# if taxi_type = "green":
+#     schema = green_schema
+# else:
+#     schema = yellow_schema
+schema = green_schema
 
 #instance a spark session
 spark = SparkSession.builder \
